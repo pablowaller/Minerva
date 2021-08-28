@@ -1,8 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import * as Font from 'expo-font'
+import { useFonts } from 'expo-font'
 
 const Header = () => {
+
+    const [loaded] = useFonts({
+        PantonLightCaps: require('../assets/fonts/OfficialBook.ttf'),
+    });
+
+    if (!loaded) {
+        return null;
+    }
 
     return (
         <View style={styles.header}>
@@ -20,7 +28,7 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        height: '5em',
+        height: 5,
         width: '100%',
         backgroundColor: '#4d0099',
         alignItems: 'center',
@@ -28,7 +36,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 35,
+        fontSize: 20,
         color: 'white',
     }
 });

@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Button, TextInput } from 'react-native';
 import Icon from '@expo/vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Color from '../colors/color'
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
     constructor(props) {
         super(props);
@@ -31,23 +31,52 @@ export default class Login extends React.Component {
     render() {
 
         return (
-            <View>
-                <View style={{ flexDirection: "row", marginTop: 25 }}>
-                    <Icon name='mail' style={{ marginRight: '2%' }} size={16} />
+            <View style={styles.loginContainer}>
+                <View style={styles.inputRow}>
+                    <Icon name='mail' style={styles.icon} size={16} />
                     <TextInput placeholder='Correo Electrónico' onChangeText={(text) => this.validate(text)}
                         value={this.state.email} style={{ borderBottomColor: 'white', borderBottom: 1 }} />
                 </View>
-                <View style={{ flexDirection: "row", marginTop: 12.5 }}>
-                    <FontAwesome name='lock' style={{ marginRight: '2%' }} size={16} />
+                <View style={styles.inputRow}>
+                    <FontAwesome name='lock' style={styles.icon} size={16} />
                     <TextInput placeholder='Contraseña' secureTextEntry={true} style={{ borderBottomColor: 'white', borderBottom: 1 }} />
                 </View>
-                <View style={{ marginTop: 12.5, marginBottom: 5, paddingHorizontal: 10 }}>
-                    <Button title='INICIAR SESION' onClick={this.validate.bind(this)} />
-                </View>
-                <View style={{ marginTop: 5 }}>
-                    <Button title='REGISTRARSE' color={Color.primary} />
+                <View style={styles.buttonsContainer}>
+                    <View style={styles.buttons}>
+                        <Button title='INICIAR SESION' onClick={this.validate.bind(this)} />
+                    </View>
+                    <View style={styles.buttons}>
+                        <Button title='REGISTRARSE' color={Color.primary} />
+                    </View>
                 </View>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+
+    loginContainer: {
+        marginTop: 5
+    },
+
+    inputRow: {
+        flexDirection: "row",
+        marginTop: 10
+    },
+
+    icon: {
+        marginRight: 2.5
+    },
+    
+    buttonsContainer: {
+        marginTop: 5
+    },
+
+    buttons: {
+        marginTop: 5
+    }
+});
+
+
+export default Login
