@@ -1,28 +1,17 @@
 import React from 'react';
-import Header from './components/Header';
-import HomeScreen from './screens/HomeScreen';
-import Login from './screens/Login'
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text,  View } from 'react-native';
-
+import BreadNavigator from './navigations/Navigator';
+import { useFonts } from 'expo-font'
 
 export default function App() {
+  const [loaded] = useFonts({
+    'Panton-LightCaps': require('./assets/fonts/Panton-LightCaps.otf'),
+  });
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
-    <View style={styles.screen}>
-      <Header/>
-      <StatusBar style="auto" />
-      <Login />
-      <HomeScreen/>
-    </View>
+    <BreadNavigator />
   );
-}
-
-const styles = StyleSheet.create({
-  screen: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
+};
