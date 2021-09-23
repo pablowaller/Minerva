@@ -1,7 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import Color from '../colors/color';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
 import UserDetailScreen from '../screens/UserDetailScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
@@ -15,9 +14,8 @@ const ROUTES = {
     HOME: 'Home',
 }
 
-const AppNavigator = () => (
+const ScreenNavigator = () => (
 
-    <NavigationContainer>
         <Stack.Navigator initialRouteName="Home" screenOptions={{
             headerStyle: {
                 backgroundColor: Platform.OS === 'android' ? Color.accent : '',
@@ -58,7 +56,6 @@ const AppNavigator = () => (
                 }}
             />
         </Stack.Navigator>
-    </NavigationContainer>
 );
 
-export default AppNavigator
+export default ScreenNavigator
