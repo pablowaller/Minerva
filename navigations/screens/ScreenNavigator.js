@@ -1,11 +1,11 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import Color from '../colors/color';
+import Color from '../../colors/color';
 import { createStackNavigator } from "@react-navigation/stack";
-import UserDetailScreen from '../screens/UserDetailScreen';
-import CategoriesScreen from '../screens/CategoriesScreen';
-import CategoryUsersScreen from '../screens/CategoryUsersScreen'
-import ChatScreen from '../screens/ChatScreen'
+import UserDetailScreen from '../../screens/UserDetailScreen';
+import CategoriesScreen from '../../screens/CategoriesScreen';
+import CategoryUsersScreen from '../../screens/CategoryUsersScreen'
+import ChatScreen from '../../screens/ChatScreen'
 
 
 const Stack = createStackNavigator();
