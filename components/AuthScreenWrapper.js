@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, KeyboardAvoidingView, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AuthScreenWrapper = ({ children, title, message, buttonText, buttonPath }) => {
-  
+const AuthScreenWrapper = ({ children, title, img, message, buttonText, buttonPath }) => {
+
   const navigation = useNavigation();
 
   return (
@@ -13,6 +13,7 @@ const AuthScreenWrapper = ({ children, title, message, buttonText, buttonPath })
     >
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
+        <Image style={styles.image} source={img}/>
         {children}
         <View style={styles.prompt}>
           <Text style={styles.promptMessage}>{message}</Text>
@@ -31,12 +32,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   title: {
     fontSize: 24,
-    fontFamily: 'OpenSansBold',
+    fontFamily: 'OpenSans-Bold',
     marginBottom: 18,
     textAlign: 'center',
   },
+
+  
+
+  image: {
+    height: 190,
+    width: 140,
+    margin: 'auto'
+  },
+
+  
   container: {
     width: '80%',
     maxWidth: 400,
@@ -51,12 +63,12 @@ const styles = StyleSheet.create({
   },
   promptMessage: {
     fontSize: 16,
-    fontFamily: 'OpenSans',
+    fontFamily: 'OpenSans-Bold',
     color: '#333',
   },
   promptButton: {
     fontSize: 16,
-    fontFamily: 'OpenSansBold',
+    fontFamily: 'OpenSans-Bold',
     color: 'green',
   },
 });

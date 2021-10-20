@@ -8,6 +8,7 @@ import store from './store';
 export default function App() {
   const [loaded] = useFonts({
     'Panton-LightCaps': require('./assets/fonts/Panton-LightCaps.otf'),
+    'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf')
   });
 
   if (!loaded) {

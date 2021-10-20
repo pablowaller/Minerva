@@ -1,28 +1,42 @@
-import React from 'react';
-import { StyleSheet, Button, View, Text } from 'react-native'
-import { useFonts } from 'expo-font'
-import AppLoading from 'expo-app-loading';
+import React, { Component } from 'react';
+import { StyleSheet, Button, View, Text, TouchableOpacity } from 'react-native'
+import DocumentPicker from 'react-native-document-picker'
 
-const BookScreen = () => {
-1
-    const [loaded] = useFonts({
-        'OpenSans-Bold': require('../assets/fonts/OpenSans-Bold.ttf'),
-    });
+class Screen1 extends Component {
 
-    if (!loaded) {
-        return <AppLoading/>
+    async openDocumentFile(){
+        try {
+            const res = await DocumentPicker.pick({
+                type: [DocumentPicker.types.allFiles]
+            });
+
+            console.log(
+                res.uri,
+                res.type,
+                res.name,
+                res.size
+            )
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+
+            } else {
+                throw err;
+            }
+        }
     }
 
-    return (
-        <View style={styles.screen}>
-            <Text style={styles.text}>Sube un documento PDF</Text>
-            <Button>Subir PDF</Button>
-        </View>
-    )
+    render() {
+        return (
+            <View style={styles.screen}>
+                <Text style={styles.text}>Sube un documento PDF</Text>
+                <TouchableOpacity onPress={() => this.openDocumentFile()} style={{ backgroundColor: '#07cde3' }}>Subir PDF</TouchableOpacity>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
-    
+
     screen: {
         alignItems: 'center'
     },
@@ -35,4 +49,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default BookScreen
+export default Screen1

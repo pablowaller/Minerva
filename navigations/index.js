@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from "@react-navigation/native";
-import TabNavigator from './tab/TabNavigator'
+import ScreenNavigator from './screens/ScreenNavigator'
 import AuthNavigator from './user/AuthNavigator';
 
 const MainNavigator = () => {
@@ -11,7 +11,7 @@ const MainNavigator = () => {
   return (
     <NavigationContainer>
       {userId
-        ? <TabNavigator />
+        ? <ScreenNavigator />
         : <AuthNavigator />}
     </NavigationContainer>
   );

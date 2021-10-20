@@ -2,9 +2,9 @@ import React, { useCallback, useReducer } from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
-import AuthScreenWrapper from '../../components/AuthScreenWrapper';
-import { signup } from '../../store/actions/auth.action';
-import Input from '../../components/Input';
+import AuthScreenWrapper from '../components/AuthScreenWrapper';
+import { signup } from '../store/actions/auth.action';
+import Input from '../components/Input';
 import Icon from '@expo/vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -74,6 +74,7 @@ const RegisterScreen = () => {
     return (
         <AuthScreenWrapper
             title="REGISTRO"
+            img = {require(('../assets/img/reading-books.png'))}
             message="¿Ya tienes cuenta?"
             buttonText="Ingresar"
             buttonPath="Login"
@@ -83,7 +84,7 @@ const RegisterScreen = () => {
                 <Icon name='mail' style={styles.icon} size={16} />
                 <Input
                     id="email"
-                    label="Email"
+                    placeholder="Correo Electrónico"
                     keyboardType="email-address"
                     autoCapitalize="none"
                     errorText="Por favor ingresa un email válido"
@@ -96,7 +97,7 @@ const RegisterScreen = () => {
                 <FontAwesome name='lock' style={styles.icon} size={16} />
                 <Input
                     id="password"
-                    label="Password"
+                    placeholder="Contraseña"
                     secureTextEntry={true}
                     autoCapitalize="none"
                     errorText="La contraseña debe ser mínimo 6 carácteres"
@@ -108,7 +109,7 @@ const RegisterScreen = () => {
             <Button
                 title="REGISTRARME"
                 onPress={handleSignUp}
-                buttonStyle={styles.button}
+                buttonStyle={styles.buttons}
             />
         </AuthScreenWrapper>
     );
@@ -121,22 +122,15 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
 
-    button: {
-        width: 250,
-        marginVertical: 20,
-    },
-
 
     inputRow: {
         flexDirection: "row",
-        marginTop: 10,
-        width: 150
-    },
-
-    icon: {
-        marginRight: 15,
-        marginTop: 5
-    },
+      },
+    
+      buttons: {
+        marginVertical: 20,
+        backgroundColor: '#2D93AD'
+      }
 });
 
 export default RegisterScreen;
