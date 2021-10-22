@@ -1,4 +1,4 @@
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator } from 'react-navigation/drawer';
 import Screen1 from './../../screens/ChatScreen'
 import Screen2 from './../../screens/BookScreen'
 

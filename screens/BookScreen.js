@@ -1,52 +1,83 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View, Text, TouchableOpacity } from 'react-native'
-import DocumentPicker from 'react-native-document-picker'
+import { AppRegistry, Button, StyleSheet, View } from 'react-native';
+import DocumentPicker from 'react-native-document-picker';
+import PSPDFKitView from 'react-native-pspdfkit';
 
-class Screen1 extends Component {
+export default class BookScreen extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			document: null,
+		};
+	}
 
-    async openDocumentFile(){
-        try {
-            const res = await DocumentPicker.pick({
-                type: [DocumentPicker.types.allFiles]
-            });
-
-            console.log(
-                res.uri,
-                res.type,
-                res.name,
-                res.size
-            )
-        } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-
-            } else {
-                throw err;
-            }
-        }
-    }
-
-    render() {
-        return (
-            <View style={styles.screen}>
-                <Text style={styles.text}>Sube un documento PDF</Text>
-                <TouchableOpacity onPress={() => this.openDocumentFile()} style={{ backgroundColor: '#07cde3' }}>Subir PDF</TouchableOpacity>
-            </View>
-        )
-    }
+	render() {
+		return (
+			<View style={{ flex: 1 }}>
+				{this.state.document == null ? (
+					<View style={styles.container}>
+						<Button
+							onPress={async () => {
+								try {
+									const file = await DocumentPicker.pick({
+										type: [DocumentPicker.types.pdf],
+										copyTo: 'documentDirectory',
+									});
+									this.setState({
+										document: decodeURI(
+											file.fileCopyUri.replace('file://', ''),
+										),
+									});
+								} catch (error) {
+									if (DocumentPicker.isCancel(error)) {
+										// The user canceled the document picker.
+									} else {
+										throw error;
+									}
+								}
+							}}
+							title="Open a PDF Document..."
+						/>
+					</View>
+				) : (
+					<PSPDFKitView
+						ref="pdfView"
+						// Set the document.
+						document={this.state.document}
+						// Show the back button on Android.
+						showNavigationButtonInToolbar={true}
+						// Show the back button on iOS.
+						showCloseButton={true}
+						// The configuration is optional.
+						configuration={{
+							showThumbnailBar: 'scrollable',
+						}}
+						// Set the document to `null` on Android.
+						onNavigationButtonClicked={(event) => {
+							this.setState({ document: null });
+						}}
+						// Set the document to `null` on iOS.
+						onCloseButtonPressed={(event) => {
+							this.setState({ document: null });
+						}}
+						style={{ flex: 1 }}
+					/>
+				)}
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-
-    screen: {
-        alignItems: 'center'
-    },
-
-    text: {
-        fontFamily: 'OpenSans-Bold',
-        fontSize: 30,
-        textAlign: 'center'
-    },
-
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#F5FCFF',
+	},
 });
 
-export default Screen1
+AppRegistry.registerComponent(
+	'DocumentBrowserExample',
+	() => DocumentBrowserExample,
+);

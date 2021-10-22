@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { View, Text, Button, TextInput, ScrollView, StyleSheet } from 'react-native'
-import { addPlace } from '../store/places.actions';
+import { View, Text, Button, ScrollView, StyleSheet } from 'react-native'
 import ImageSelector from '../components/ImageSelector';
 
 const NewPlaceScreen = ({ navigation }) => {
     const dispatch = useDispatch();
-    const [title, setTitle] = useState('')
     const [image, setImage] = useState();
 
-    const handleTitleChange = text => setTitle(text);
 
     const handleSave = () => {
-        dispatch(addPlace(title, image));
+        dispatch(image);
         navigation.navigate('Direcciones');
     }
 
@@ -24,14 +21,7 @@ const NewPlaceScreen = ({ navigation }) => {
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.label}>Editar Perfil</Text>
-                <TextInput
-                    style={styles.input}
-                    value={title}
-                    onChangeText={handleTitleChange}
-                />
-
                 <ImageSelector onImage={handlePickImage} />
-
                 <Button
                     title="Subir foto"
                     onPress={handleSave}

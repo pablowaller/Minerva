@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-class Screen2 extends Component {
+class ChatScreen extends Component {
     render() {
         return (
             <View style={styles.screen}>
                 <Text style={styles.text}>Sube un documento PDF</Text>
-                <Button>Subir PDF</Button>
             </View>
         )
     }
@@ -26,4 +25,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Screen2;
+export default ChatScreen;

@@ -1,21 +1,27 @@
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import React from 'react';
+import { StyleSheet, View, Image, Text } from 'react-native'
 import HomeScreen from './../../screens/HomeScreen'
-import DrawerStack from './../stacks/drawerStack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import ChatScreen from './../../screens/ChatScreen'
+import BookScreen from './../../screens/BookScreen'
+import NewPlaceScreen from './../../screens/EditProfile'
 
-const Stack = createStackNavigator({
-  drawerStack: { screen: DrawerStack }
-}, {
-  headerMode: 'none',
-  initialRouteName: 'drawerStack'
-})
+const Drawer = createDrawerNavigator();
 
-const StackNavigator = createAppContainer(Stack)
+function CustomDrawerContent(props) {
+  return (
+    <View style={{backgroundColor: "#5b07a6"}}></View>
+  )
+}
 
 const ScreenNavigator = () => (
-  <StackNavigator>
-      <HomeScreen/>
-  </StackNavigator>
+  <Drawer.Navigator drawerStyle={{color: "#5b07a6"}}>
+    <Drawer.Screen name="Home" component={HomeScreen} backgroundColor="#5b07a6" />
+    <Drawer.Screen name="Chat" component={ChatScreen} backgroundColor="#5b07a6" />
+    <Drawer.Screen name="Libros" component={BookScreen} backgroundColor="#5b07a6" />
+    <Drawer.Screen name="Mi cuenta" component={NewPlaceScreen} />
+  </Drawer.Navigator>
 )
+
 export default ScreenNavigator;
 
