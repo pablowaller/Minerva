@@ -30,33 +30,26 @@ export default class BookScreen extends Component {
 									});
 								} catch (error) {
 									if (DocumentPicker.isCancel(error)) {
-										// The user canceled the document picker.
 									} else {
 										throw error;
 									}
 								}
 							}}
-							title="Open a PDF Document..."
+							title="SUBIR DOCUMENTO PDF..."
 						/>
 					</View>
 				) : (
 					<PSPDFKitView
 						ref="pdfView"
-						// Set the document.
 						document={this.state.document}
-						// Show the back button on Android.
 						showNavigationButtonInToolbar={true}
-						// Show the back button on iOS.
 						showCloseButton={true}
-						// The configuration is optional.
 						configuration={{
 							showThumbnailBar: 'scrollable',
 						}}
-						// Set the document to `null` on Android.
 						onNavigationButtonClicked={(event) => {
 							this.setState({ document: null });
 						}}
-						// Set the document to `null` on iOS.
 						onCloseButtonPressed={(event) => {
 							this.setState({ document: null });
 						}}

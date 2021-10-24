@@ -6,9 +6,9 @@ import Color from '../../colors/color'
 
 const Stack = createNativeStackNavigator();
 
-const AuthNavigator = () => (
+const AuthNavigator =  ()=> (
   <Stack.Navigator
-    initialRouteName="Login"
+    initialRouteName="Auth Screens"
     screenOptions={{
       headerStyle: {
         backgroundColor: Platform.OS === 'android' ? Color.accent : '',

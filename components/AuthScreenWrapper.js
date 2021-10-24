@@ -45,10 +45,11 @@ const styles = StyleSheet.create({
   image: {
     height: 190,
     width: 140,
-    margin: 'auto'
+    margin: 'auto',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
-  
   container: {
     width: '80%',
     maxWidth: 400,
@@ -58,14 +59,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
   },
+
   prompt: {
     alignItems: 'center',
   },
+
   promptMessage: {
     fontSize: 16,
     fontFamily: 'OpenSans-Bold',
     color: '#333',
   },
+
   promptButton: {
     fontSize: 16,
     fontFamily: 'OpenSans-Bold',

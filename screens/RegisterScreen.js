@@ -1,115 +1,77 @@
-import React, { useCallback, useReducer } from 'react';
-import { View, Alert, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { Input, Button } from 'react-native-elements';
 import AuthScreenWrapper from '../components/AuthScreenWrapper';
-import { signup } from '../store/actions/auth.action';
-import Input from '../components/Input';
-import Icon from '@expo/vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { auth } from "../constants/database"
 
-const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+const RegisterScreen = ({ navigation }) => {
 
-const formReducer = (state, action) => {
-    if (action.type === FORM_INPUT_UPDATE) {
-        const inputValues = {
-            ...state.inputValues,
-            [action.input]: action.value,
-        }
-        const inputValidities = {
-            ...state.inputValidities,
-            [action.input]: action.isValid,
-        }
-        let formIsValid = true;
-
-        for (const key in inputValidities) {
-            formIsValid = formIsValid && inputValidities[key];
-        }
-
-        return {
-            formIsValid,
-            inputValues,
-            inputValidities,
-        }
-    }
-
-    return state;
-};
-
-const RegisterScreen = () => {
-    const dispatch = useDispatch();
-    const [formState, formDispatch] = useReducer(formReducer, {
-        inputValues: {
-            email: '',
-            password: '',
-        },
-        inputValidities: {
-            email: false,
-            password: false,
-        },
-        formIsValid: false,
-    });
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
+    const [imageURl, setImageURl] = useState('')
 
     const handleSignUp = () => {
-        if (formState.formIsValid) {
-            dispatch(signup(formState.inputValues.email, formState.inputValues.password));
-        } else {
-            Alert.alert(
-                'Formulario inválido',
-                'Ingresa email y usuario válido',
-                [{ text: 'Ok' }]
-            );
-        }
-    }
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                var user = userCredential.user;
+                user.updateProfile({
+                    displayName: name,
+                    photoURL: imageURl ? imageURl : "https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png"
+                }).then(function () {
 
-    const onInputChangeHandler = useCallback((inputIdentifier, inputValue, inputValidity) => {
-        formDispatch({
-            type: FORM_INPUT_UPDATE,
-            value: inputValue,
-            isValid: inputValidity,
-            input: inputIdentifier,
-        });
-    }, [formDispatch]);
+                }).catch(function (error) {
+
+                })
+                navigation.popToTop()
+            })
+            .catch((error) => {
+                var errorMessage = error.message;
+                alert(errorMessage)
+            });
+    }
 
     return (
         <AuthScreenWrapper
             title="REGISTRO"
-            img = {require(('../assets/img/reading-books.png'))}
+            img={require(('../assets/img/reading-books.png'))}
             message="¿Ya tienes cuenta?"
             buttonText="Ingresar"
             buttonPath="Login"
             style={styles.registerContainer}
         >
-            <View style={styles.inputRow}>
-                <Icon name='mail' style={styles.icon} size={16} />
-                <Input
-                    id="email"
-                    placeholder="Correo Electrónico"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    errorText="Por favor ingresa un email válido"
-                    required
-                    email
-                    onInputChange={onInputChangeHandler}
-                />
-            </View>
-            <View style={styles.inputRow}>
-                <FontAwesome name='lock' style={styles.icon} size={16} />
-                <Input
-                    id="password"
-                    placeholder="Contraseña"
-                    secureTextEntry={true}
-                    autoCapitalize="none"
-                    errorText="La contraseña debe ser mínimo 6 carácteres"
-                    required
-                    minLength={6}
-                    onInputChange={onInputChangeHandler}
-                />
-            </View>
+            <Input
+                placeholder="Nombre"
+                leftIcon={{ type: "material", name: "badge" }}
+                value={name}
+                onChangeText={text => setName(text)}
+                required
+            />
+            <Input
+                placeholder="Correo Electrónico"
+                leftIcon={{ type: "material", name: "email" }}
+                value={email}
+                onChangeText={text => setEmail(text)}
+                required
+            />
+            <Input
+                placeholder="Contraseña"
+                leftIcon={{ type: "material", name: "lock" }}
+                value={password}
+                onChangeText={text => setPassword(text)}
+                secureTextEntry={true}
+                required
+            />
+            <Input
+                placeholder="Foto de Perfil"
+                leftIcon={{ type: "material", name: "face" }}
+                value={imageURl}
+                onChangeText={text => setImageURl(text)}
+            />
             <Button
                 title="REGISTRARME"
                 onPress={handleSignUp}
-                buttonStyle={styles.buttons}
+                buttonStyle={styles.button}
             />
         </AuthScreenWrapper>
     );
@@ -122,15 +84,10 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
 
-
-    inputRow: {
-        flexDirection: "row",
-      },
-    
-      buttons: {
-        marginVertical: 20,
+    button: {
+        width: 200,
         backgroundColor: '#2D93AD'
-      }
+    }
 });
 
 export default RegisterScreen;

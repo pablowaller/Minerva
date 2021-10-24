@@ -5,13 +5,13 @@ import ScreenNavigator from './screens/ScreenNavigator'
 import AuthNavigator from './user/AuthNavigator';
 
 const MainNavigator = () => {
-
-  const userId = useSelector(state => state.auth.userId);
+z
+  const userId = useSelector(state => state.auth.currentUser);
 
   return (
     <NavigationContainer>
       {userId
-        ? <ScreenNavigator />
+        ? <ScreenNavigator/>
         : <AuthNavigator />}
     </NavigationContainer>
   );
