@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react-native-document-picker" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/react-navigation-drawer" vcs="Git" />
   </component>
 </project>

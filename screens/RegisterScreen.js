@@ -34,7 +34,7 @@ const RegisterScreen = ({ navigation }) => {
     return (
         <AuthScreenWrapper
             title="REGISTRO"
-            img={require(('../assets/img/reading-books.png'))}
+            img={require(('../assets/img/logo.png'))}
             message="¿Ya tienes cuenta?"
             buttonText="Ingresar"
             buttonPath="Login"
@@ -79,13 +79,7 @@ const RegisterScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 
-    registerContainer: {
-        alignItems: 'center',
-        marginTop: 5
-    },
-
     button: {
-        width: 200,
         backgroundColor: '#2D93AD'
     }
 });

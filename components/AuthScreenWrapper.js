@@ -40,21 +40,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  
-
   image: {
     height: 190,
     width: 140,
     margin: 'auto',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignSelf: 'center'
   },
 
   container: {
     width: '80%',
     maxWidth: 400,
     padding: 12,
-    margin: 12,
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 10,

@@ -7,7 +7,6 @@ import {auth} from "../constants/database"
 const LoginScreen = ({navigation}) => {
 
   const [email, setEmail] = useState('')
-
   const [password, setPassword] = useState('')
 
   const handleLogin = () => {
@@ -17,24 +16,26 @@ const LoginScreen = ({navigation}) => {
       })
   }
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged
-      (function (user) {
-        if (user) {
-          navigation.replace('Home')
-        } else {
-          navigation.canGoBack('Home') && navigation.popToTop()
-        }
-      });
-    return () => {
-      unsubscribe
-    }
-  }, [])
+  
+    useEffect(()=>{
+       const unsubscribe= auth.onAuthStateChanged
+ (function(user) {
+            if (user) {
+              navigation.navigate('Screens');            
+            } else {
+                navigation.canGoBack() && 
+                navigation.popToTop();
+            }}
+         )
+       return()=>{
+        unsubscribe
+       }
+    },[])
 
   return (
     <AuthScreenWrapper
       title="INICIAR SESIÓN"
-      img={require(('../assets/img/owl-waving.png'))}
+      img={require(('../assets/img/logo.png'))}
       message="¿Aún no tienes cuenta?"
       buttonText="Ir al registro"
       buttonPath="Register"
@@ -65,13 +66,7 @@ const LoginScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
 
-  loginContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
   button: {
-    width: 200,
     backgroundColor: '#2D93AD'
   }
 });

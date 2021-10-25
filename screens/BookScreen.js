@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { AppRegistry, Button, StyleSheet, View } from 'react-native';
-import DocumentPicker from 'react-native-document-picker';
+import { Image, Text, Button, StyleSheet, View } from 'react-native';
+import DocumentPicker from 'react-native-document-picker'
 import PSPDFKitView from 'react-native-pspdfkit';
 
-export default class BookScreen extends Component {
+export default class BookScreen extends Component<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,7 +13,9 @@ export default class BookScreen extends Component {
 
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
+			<View style={styles.screen}>
+		<Text style={styles.welcome}>¡Elegí el libro de tu biblioteca que quieras leer!</Text>
+		<Image style={styles.image} source={require('../assets/img/reading-books.png')}/>
 				{this.state.document == null ? (
 					<View style={styles.container}>
 						<Button
@@ -56,21 +58,26 @@ export default class BookScreen extends Component {
 						style={{ flex: 1 }}
 					/>
 				)}
-			</View>
+				</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
-	},
-});
 
-AppRegistry.registerComponent(
-	'DocumentBrowserExample',
-	() => DocumentBrowserExample,
-);
+    screen: {
+        alignItems: 'center'
+    },
+
+    welcome: {
+        fontFamily: 'OpenSans-Bold',
+        fontSize: 30,
+        textAlign: 'center'
+    },
+
+    image: {
+        height: 250,
+        width: 200
+    }
+
+});
