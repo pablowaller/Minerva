@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import MainNavigator from './navigations';
+import MainNavigator from './navigations'
 
 export default function App() {
   const [loaded] = useFonts({
