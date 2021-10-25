@@ -7,7 +7,7 @@ import Color from '../../colors/color'
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigator =  ()=> (
+const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{
       headerStyle: {
