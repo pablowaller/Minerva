@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import AuthScreenWrapper from '../components/AuthScreenWrapper';
 import {auth} from "../constants/Database"
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginScreen = ({navigation}) => {
 
@@ -10,12 +11,11 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState('')
 
   const handleLogin = () => {
-    auth.signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .catch((error) => {
-        alert(error)
-      })
-  }
-
+        alert(error.message);
+      });
+  };  
   
     useEffect(()=>{
        const unsubscribe= auth.onAuthStateChanged
